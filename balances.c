@@ -218,7 +218,7 @@ int main(int argc, char *argv[])
 		block_arr[i - 1] = make_node(b, 0);
 		/* Feel free to add/modify/delete any code you need to. */
 	}
-	block_mine(last_node->b);
+	block_mine(block_arr[1]->b);
 
 	/* Organize into a tree, check validity, and output balances. */
 	/* TODO */
