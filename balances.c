@@ -82,16 +82,13 @@ struct blockchain_node* make_node(struct block b, struct blockchain_node* parent
 
 
 int cmp_block(const void* ia, const void* ib) {
-	printf("HEJKL:J");
 	struct blockchain_node* a = (struct blockchain_node*) ia;
 	struct blockchain_node* b = (struct blockchain_node*) ib;
 	if(a->b.height < b->b.height) {
-		printf("%s\n", "here");
 		return -1;
 	} else if (a->b.height > b->b.height) {
 		return 1;
 	} else {
-		printf("%d\n", a->b.height);
 		return 0;
 	}
 }
@@ -136,7 +133,7 @@ int main(int argc, char *argv[])
 	/* Organize into a tree, check validity, and output balances. */
 	/* TODO */
 	//size_t struct_len = (argc * sizeof()) / sizeof(struct blockchain_node);
-	qsort(block_arr, argc, sizeof(struct blockchain_node), cmp_block);
+	qsort(block_arr, argc - 1, sizeof(struct blockchain_node), cmp_block);
 
 	for(i = 0; i < argc - 1; i ++) {
 		block_print(&(block_arr[i]->b), stdout);
