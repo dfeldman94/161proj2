@@ -132,6 +132,8 @@ int transaction_unique(hash_output h, struct blockchain_node *root) {
 		} else {
 			return 1;
 		}
+	} else {
+		return 0;
 	}
 }
 
