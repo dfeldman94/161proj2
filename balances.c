@@ -82,8 +82,8 @@ struct blockchain_node* make_node(struct block b, struct blockchain_node* parent
 
 
 int cmp_block(const void* ia, const void* ib) {
-	struct blockchain_node* a = *(struct blockchain_node**)) ia;
-	struct blockchain_node* b = *(struct blockchain_node**)) ib;
+	struct blockchain_node* a = *(struct blockchain_node**) ia;
+	struct blockchain_node* b = *(struct blockchain_node**) ib;
 	printf("a: %d, b: %d", a->b.height, b->b.height);
 	if(a->b.height < b->b.height) {
 		return -1;
