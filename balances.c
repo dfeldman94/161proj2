@@ -170,7 +170,7 @@ int check_if_valid(struct blockchain_node* node) {
 //struct blockchain_node* order_tree(struct blockchain_node* root) {
 
 //}
-int part2_mine(struct blockchain_node newblock, struct blockchain_node headblock) {
+int part2_mine(struct block newblock, struct block headblock) {
 	/* Build on top of the head of the main chain. */
 	block_init(&newblock, &headblock);
 /* Give the reward to us. */
@@ -263,7 +263,7 @@ int main(int argc, char *argv[])
 	}
 	int part2 =1;
 	if(part2) {
-		part2_mine(*curr_node, *last_node);
+		part2_mine(*(curr_node->b), *(last_node->b));
 	}
 
 	free(curr_node);
