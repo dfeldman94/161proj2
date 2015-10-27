@@ -127,15 +127,16 @@ int main(int argc, char *argv[])
 		printf("Read block %d\n", b.height);
 		/* TODO READ BLOCKS INTO MEMORY*/
 		//Just read everything in first
-		block_arr[i] = make_node(b, 0);
+		block_arr[i - 1] = make_node(b, 0);
 		/* Feel free to add/modify/delete any code you need to. */
 	}
 
 	/* Organize into a tree, check validity, and output balances. */
 	/* TODO */
-	qsort(block_arr, (sizeof(block_arr) / sizeof(struct blockchain_node)), sizeof(struct blockchain_node), cmp_block);
+	size_t struct_len = sizeof(block_arr) / sizeof(struct blockchain_node);
+	qsort(block_arr, struct_len, sizeof(struct blockchain_node), cmp_block);
 
-	for(i = 1; i < argc; i ++) {
+	for(i = 0; i < argc - 1; i ++) {
 		block_print(&(block_arr[i]->b), stdout);
 	}
 
