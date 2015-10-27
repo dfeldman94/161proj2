@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 	/* Organize into a tree, check validity, and output balances. */
 	/* TODO */
 	//size_t struct_len = (argc * sizeof(struct blockchain_node*)) / sizeof(struct blockchain_node*);
-	qsort(block_arr, argc, sizeof(struct blockchain_node), cmp_block);
+	qsort(block_arr, argc - 1, sizeof(struct blockchain_node*), cmp_block);
 
 	for(i = 0; i < argc - 1; i ++) {
 		block_print(&(block_arr[i]->b), stdout);
