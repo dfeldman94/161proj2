@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
 	struct blockchain_node* root = block_arr[0];
 	struct blockchain_node* curr_parent = root;
 	struct blockchain_node* curr_node;
-	struct blockchain_node* last_node;
+	struct blockchain_node* last_node = root;
 	int curr_height = 0;
 
 	for(i = 1; i < argc - 1; i ++) {
@@ -148,6 +148,7 @@ int main(int argc, char *argv[])
 			curr_height = curr_node->b.height;
 		}
 		curr_node->parent = curr_parent;
+		last_node = curr_node;
 		block_print(&(block_arr[i]->b), stdout);
 
 	}
