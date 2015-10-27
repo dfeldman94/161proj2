@@ -95,12 +95,12 @@ int cmp_block(const void* ia, const void* ib) {
 
 struct blockchain_node* find_transaction(hash_output h, struct blockchain_node * root) {
 	hash_output g;
-	transaction_hash(root->b.reward_tx, g);
+	transaction_hash(&(root->b.reward_tx), g);
 	if(byte32_cmp(g, h) == 0) {
 		return root;
 	}
-	transaction_hash(root->b.normal_tx, g);
-	if(byte32_cmp(g, h) == ) {
+	transaction_hash(&(root->b.normal_tx), g);
+	if(byte32_cmp(g, h) == 0) {
 		return root;
 	} else {
 		if(byte32_is_zero(root->b.prev_block_hash)) {
@@ -112,7 +112,7 @@ struct blockchain_node* find_transaction(hash_output h, struct blockchain_node *
 
 }
 int find_prev_transaction(hash_output h, struct blockchain_node * root) {
-	if(byte32_cmp(node->b.normal_tx.prev_transaction_hash, h) == 0) {
+	if(byte32_cmp(root->b.normal_tx.prev_transaction_hash, h) == 0) {
 		return 1;
 	} else {
 		if(byte32_is_zero(root->b.prev_block_hash)) {
@@ -130,7 +130,7 @@ int transaction_unique(hash_output h, struct blockchain_node *root) {
 		if(second_root) {
 			return -1;
 		} else {
-			1;
+			return 1;
 		}
 	}
 }
@@ -139,7 +139,7 @@ int transaction_unique(hash_output h, struct blockchain_node *root) {
 int check_if_valid(struct blockchain_node* node) {
 	hash_output h;
 	int block_height = node->b.height;
-	block_hash(node->b, h);
+	block_hash(&(node->b), h);
 	if(block_height == 0) {
 		if(h != GENESIS_BLOCK_HASH) {
 			return -1;
@@ -156,7 +156,7 @@ int check_if_valid(struct blockchain_node* node) {
 		return -1;
 	}
 	if(!byte32_is_zero(node->b.normal_tx.prev_transaction_hash)) {
-		if(find_transaction(h, node) && transaction_unique(h, node) && transaction_verify(node->b.normal_tx, node->b.normal_tx.prev_transaction_hash) && !find_prev_transaction(h, node))  {
+		if(find_transaction(h, node) && transaction_unique(h, node) && transaction_verify(&(node->b.normal_tx), &(node->b.normal_tx.prev_transaction_hash)) && !find_prev_transaction(h, node))  {
 			return 1;
 	} 
 	return -1;
