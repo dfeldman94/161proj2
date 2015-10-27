@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
 	//size_t struct_len = (argc * sizeof(struct blockchain_node*)) / sizeof(struct blockchain_node*);
 	qsort(block_arr, argc - 1, sizeof(struct blockchain_node*), cmp_block);
 
-	struct blockchain_node* root = malloc(sizeof(struct blockchain_node));
+	/*struct blockchain_node* root = malloc(sizeof(struct blockchain_node));
 	if(root == NULL) {
 		return -1;
 	}
@@ -266,12 +266,13 @@ int main(int argc, char *argv[])
 	/*int part2 =1;
 	if(part2) {
 		part2_mine(*(curr_node->b), *(last_node->b));
-	}*/
+	}
 
 	free(curr_node);
 	free(curr_parent);
 	free(root);
 	free(last_node);
+	*/
 
 
 
