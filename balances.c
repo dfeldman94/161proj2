@@ -81,6 +81,15 @@ struct blockchain_node* make_node(struct block b, struct blockchain_node* parent
 }
 
 
+int cmp_block(struct blockchain_node* a, struct blockchain_node* b) {
+	if(a.b.height < b.b.height) {
+		return -1;
+	} else if (a.b.height > b.b.height) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
 
 //Orders the tree from the given root
 //struct blockchain_node* order_tree(struct blockchain_node* root) {
@@ -123,6 +132,7 @@ int main(int argc, char *argv[])
 
 	/* Organize into a tree, check validity, and output balances. */
 	/* TODO */
+	qsort(block_arr, sizeof(block_arr) / sizeof(struct blockchain_node), sizeof(struct blockchain_node), cmp_block);
 
 
 	struct balance *balances = NULL, *p, *next;
