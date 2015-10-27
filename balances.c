@@ -97,8 +97,8 @@ int main(int argc, char *argv[])
 	block_arr = malloc(sizeof(struct blockchain_node) * argc);
 
 	//This will point to the root of our tree
-	struct blockchain_node* root;
-	struct blockchain_node* last;
+	//	struct blockchain_node* root;
+	//struct blockchain_node* last;
 
 	/* Read input block files. */
 	for (i = 1; i < argc; i++) {
