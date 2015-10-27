@@ -68,13 +68,13 @@ static struct balance *balance_add(struct balance *balances,
 }
 
 //Returns a pointer to a blockchain node instance
-struct blockchain_node* make_node(struct block bl, struct blockchain_node* parent)
+struct blockchain_node* make_node(struct block b, struct blockchain_node* parent)
 {
 	struct blockchain_node *node; 
 	node = malloc(sizeof(struct blockchain_node));
 	if (node == NULL)
-		return -1;
-	node->b = bl;
+		return NULL;
+	node->b = b;
 	node->parent = parent;
 	node->is_valid = -1;
 	return node;
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 	//struct blockchain_node block_arr[argc];
 
 	//This will point to the root of our tree
-	struct blockchain_node* root;
+	//	struct blockchain_node* root;
 	struct blockchain_node* last;
 
 	/* Read input block files. */
@@ -108,10 +108,10 @@ int main(int argc, char *argv[])
 		/* TODO READ BLOCKS INTO MEMORY*/
 		//Just read everything in first
 		if(i == 1) {
-			last = make_node(bl, 0);
-			root = last;
+			last = make_node(b, 0);
+			//		root = last;
 		}
-		last = make_node(bl, last);
+		last = make_node(b, last);
 
 
 		/* Feel free to add/modify/delete any code you need to. */
