@@ -212,7 +212,6 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "could not read %s\n", filename);
 			exit(1);
 		}
-		printf("Read block %d\n", b.height);
 		/* TODO READ BLOCKS INTO MEMORY*/
 		//Just read everything in first
 		block_arr[i - 1] = make_node(b, 0);
