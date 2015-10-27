@@ -93,6 +93,75 @@ int cmp_block(const void* ia, const void* ib) {
 	}
 }
 
+struct blockchain_node* find_transaction(hash_output h, struct blockchain_node * root) {
+	hash_output g;
+	transaction_hash(root->b.reward_tx, g);
+	if(byte32_cmp(g, h) == 0) {
+		return root;
+	}
+	transaction_hash(root->b.normal_tx, g);
+	if(byte32_cmp(g, h) == ) {
+		return root;
+	} else {
+		if(byte32_is_zero(root->b.prev_block_hash)) {
+			return NULL;
+		}
+		return find_transaction(h, root->parent);
+	}
+
+
+}
+int find_prev_transaction(hash_output h, struct blockchain_node * root) {
+	if(byte32_cmp(node->b.normal_tx.prev_transaction_hash, h) == 0) {
+		return 1;
+	} else {
+		if(byte32_is_zero(root->b.prev_block_hash)) {
+			return -1;
+		}
+		return find_prev_transaction(h, root->parent);
+	}
+
+
+}
+int transaction_unique(hash_output h, struct blockchain_node *root) {
+	struct blockchain_node* second_root = find_transaction(h, root);
+	if(second_root){
+		second_root = find_transaction(h, root);
+		if(second_root) {
+			return -1;
+		} else {
+			1;
+		}
+	}
+}
+
+
+int check_if_valid(struct blockchain_node* node) {
+	hash_output h;
+	int block_height = node->b.height;
+	block_hash(node->b, h);
+	if(block_height == 0) {
+		if(h != GENESIS_BLOCK_HASH) {
+			return -1;
+		}
+	} else if (byte32_cmp(h, TARGET_HASH) >= 0) {
+		return -1;
+	} else if (!(node->parent->is_valid) || (block_height != node->parent->b.height + 1)) {
+		return -1;
+	} 
+	if(block_height != node->b.reward_tx.height || block_height != node->b.normal_tx.height) {
+		return -1;
+	}
+	if(byte32_is_zero(node->b.reward_tx.prev_transaction_hash) || byte32_is_zero(node->b.reward_tx.src_signature.r) || byte32_is_zero(node->b.reward_tx.src_signature.s)) {
+		return -1;
+	}
+	if(!byte32_is_zero(node->b.normal_tx.prev_transaction_hash)) {
+		if(find_transaction(h, node) && transaction_unique(h, node) && transaction_verify(node->b.normal_tx, node->b.normal_tx.prev_transaction_hash) && !find_prev_transaction(h, node))  {
+			return 1;
+	} 
+	return -1;
+}
+
 //Orders the tree from the given root
 //struct blockchain_node* order_tree(struct blockchain_node* root) {
 
@@ -143,15 +212,20 @@ int main(int argc, char *argv[])
 
 	for(i = 1; i < argc - 1; i ++) {
 		curr_node = block_arr[i];
+		if(check_if_valid(curr_node)) {
+			curr_node->is_valid = 1;
+		} else {
+			curr_node->is_valid = 0;
+		}
 		if(curr_node->b.height > curr_height) {
 			curr_parent = last_node;
 			curr_height = curr_node->b.height;
 		}
 		curr_node->parent = curr_parent;
 		last_node = curr_node;
-		block_print(&(block_arr[i]->b), stdout);
 
 	}
+
 
 
 	struct balance *balances = NULL, *p, *next;
