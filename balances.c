@@ -93,15 +93,15 @@ int cmp_block(const void* ia, const void* ib) {
 	}
 }
 
-struct blockchain_node* find_transaction(hash_output h, struct blockchain_node * root) {
+struct transaction* find_transaction(hash_output h, struct blockchain_node * root) {
 	hash_output g;
 	transaction_hash(&(root->b.reward_tx), g);
 	if(byte32_cmp(g, h) == 0) {
-		return root;
+		return root->b.reward_tx;
 	}
 	transaction_hash(&(root->b.normal_tx), g);
 	if(byte32_cmp(g, h) == 0) {
-		return root;
+		return root->b.normal_tx
 	} else {
 		if(byte32_is_zero(root->b.prev_block_hash)) {
 			return NULL;
