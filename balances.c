@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "could not read %s\n", filename);
 			exit(1);
 		}
-		printf("Read block %d\n", rc);
+		printf("Read block %d\n", b.height);
 		/* TODO READ BLOCKS INTO MEMORY*/
 		/* Feel free to add/modify/delete any code you need to. */
 	}
