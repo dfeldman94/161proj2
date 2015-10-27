@@ -170,7 +170,22 @@ int check_if_valid(struct blockchain_node* node) {
 //struct blockchain_node* order_tree(struct blockchain_node* root) {
 
 //}
-
+int part2_mine(struct blockchain_node newblock, struct blockchain_node headblock) {
+	/* Build on top of the head of the main chain. */
+	block_init(&newblock, &headblock);
+/* Give the reward to us. */
+	transaction_set_dest_privkey(&newblock.reward_tx, mykey);
+/* The last transaction was in block 4. */
+	transaction_set_prev_transaction(&newblock.normal_tx, &block4.normal_tx);
+/* Send it to us. */
+	transaction_set_dest_privkey(&newblock.normal_tx, mykey);
+/* Sign it with the guessed private key. */
+	transaction_sign(&newblock.normal_tx, weakkey);
+/* Mine the new block. */
+	block_mine(&newblock);
+/* Save to a file. */
+	block_write_filename(&newblock, "myblock1.blk");
+}
 
 int main(int argc, char *argv[])
 {
@@ -185,6 +200,7 @@ int main(int argc, char *argv[])
 	//struct blockchain_node* last;
 
 	/* Read input block files. */
+
 	for (i = 1; i < argc; i++) {
 		char *filename;
 		struct block b;
@@ -245,6 +261,11 @@ int main(int argc, char *argv[])
 		last_node = curr_node;
 
 	}
+	int part2 =1;
+	if(part2) {
+		part2_mine(*curr_node, *last_node);
+	}
+
 	free(curr_node);
 	free(curr_parent);
 	free(root);
