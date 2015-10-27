@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
 	int i;
 
 	//This will have all of our pinters to blocks
-	struct blockchain_node *block_arr[argc];
+	struct blockchain_node *block_arr[argc + 1];
 	//block_arr = malloc(sizeof(struct blockchain_node) * argc);
 
 	//This will point to the root of our tree
