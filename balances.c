@@ -81,15 +81,23 @@ struct blockchain_node* make_node(struct block b, struct blockchain_node* parent
 }
 
 
+
+//Orders the tree from the given root
+//struct blockchain_node* order_tree(struct blockchain_node* root) {
+
+//}
+
+
 int main(int argc, char *argv[])
 {
 	int i;
 
 	//This will have all of our pinters to blocks
-	//struct blockchain_node block_arr[argc];
+	struct blockchain_node **block_arr;
+	block_arr = malloc(sizeof(struct blockchain_node) * argc);
 
 	//This will point to the root of our tree
-	//	struct blockchain_node* root;
+	struct blockchain_node* root;
 	struct blockchain_node* last;
 
 	/* Read input block files. */
@@ -107,11 +115,7 @@ int main(int argc, char *argv[])
 		printf("Read block %d\n", b.height);
 		/* TODO READ BLOCKS INTO MEMORY*/
 		//Just read everything in first
-		if(i == 1) {
-			last = make_node(b, 0);
-			//		root = last;
-		}
-		last = make_node(b, last);
+		*(block_arr + i) = make_node(b, 0);
 
 
 		/* Feel free to add/modify/delete any code you need to. */
@@ -119,6 +123,7 @@ int main(int argc, char *argv[])
 
 	/* Organize into a tree, check validity, and output balances. */
 	/* TODO */
+
 
 	struct balance *balances = NULL, *p, *next;
 	/* Print out the list of balances. */
