@@ -156,7 +156,8 @@ int check_if_valid(struct blockchain_node* node) {
 		return -1;
 	}
 	if(!byte32_is_zero(node->b.normal_tx.prev_transaction_hash)) {
-		if(find_transaction(h, node) && transaction_unique(h, node) && transaction_verify(&(node->b.normal_tx), &(node->b.normal_tx.prev_transaction_hash)) && !find_prev_transaction(h, node))  {
+		const struct transaction * prev_tx = find_transaction(h, node);
+		if(prev_tx && transaction_unique(h, node) && transaction_verify(&(node->b.normal_tx), prev_tx) && !find_prev_transaction(h, node))  {
 			return 1;
 	} 
 	return -1;
