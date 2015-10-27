@@ -142,7 +142,6 @@ void block_mine(struct block *b)
 		b->nonce = b->nonce + 1;
 		block_hash(b, h);
 	} while(!(hash_output_is_below_target(h)));
-	printf("Hashes: %d\n", i);
 	/* TODO */
 }
 

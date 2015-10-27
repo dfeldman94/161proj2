@@ -225,22 +225,22 @@ int main(int argc, char *argv[])
 	//size_t struct_len = (argc * sizeof(struct blockchain_node*)) / sizeof(struct blockchain_node*);
 	qsort(block_arr, argc - 1, sizeof(struct blockchain_node*), cmp_block);
 
-	/*struct blockchain_node* root = malloc(sizeof(struct blockchain_node));
+	struct blockchain_node root = malloc(sizeof(struct blockchain_node));
 	if(root == NULL) {
 		return -1;
 	}
 	root = block_arr[0];
-	struct blockchain_node* curr_parent = malloc(sizeof(struct blockchain_node));
+	struct blockchain_node curr_parent = malloc(sizeof(struct blockchain_node));
 	if(curr_parent == NULL) {
 		return -1;
 	}
 	curr_parent = root;
 
-	struct blockchain_node* curr_node = malloc(sizeof(struct blockchain_node));
+	struct blockchain_node curr_node = malloc(sizeof(struct blockchain_node));
 	if(curr_node == NULL) {
 		return -1;
 	}
-	struct blockchain_node* last_node = malloc(sizeof(struct blockchain_node));
+	struct blockchain_node last_node = malloc(sizeof(struct blockchain_node));
 	if(last_node == NULL) {
 		return -1;
 	}
@@ -248,24 +248,24 @@ int main(int argc, char *argv[])
 	int curr_height = 0;
 
 	for(i = 1; i < argc - 1; i ++) {
-		curr_node = block_arr[i];
-		if(check_if_valid(curr_node)) {
-			curr_node->is_valid = 1;
+		*curr_node = block_arr[i];
+		if(check_if_valid(*curr_node)) {
+			(*curr_node)->is_valid = 1;
 		} else {
-			curr_node->is_valid = 0;
+			(*curr_node)->is_valid = 0;
 		}
-		if(curr_node->b.height > curr_height) {
+		if((*curr_node)->b.height > curr_height) {
 			curr_parent = last_node;
-			curr_height = curr_node->b.height;
+			curr_height = (*curr_node)->b.height;
 		}
-		curr_node->parent = curr_parent;
+		(*curr_node)->parent = curr_parent;
 		last_node = curr_node;
 
 	}
-	int part2 =1;
+	/*int part2 =1;
 	if(part2) {
 		part2_mine(*(curr_node->b), *(last_node->b));
-	}
+	}*/
 
 	free(curr_node);
 	free(curr_parent);
