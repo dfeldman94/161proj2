@@ -90,6 +90,7 @@ int cmp_block(const void* ia, const void* ib) {
 	} else if (a->b.height > b->b.height) {
 		return 1;
 	} else {
+		printf("%d\n", a->b.height);
 		return 0;
 	}
 }
