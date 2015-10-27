@@ -67,12 +67,12 @@ static struct balance *balance_add(struct balance *balances,
 }
 
 //Returns a pointer to a blockchain node instance
-int make_node(int *block) {
+struct blockchain_node* make_node(struct block bl) {
 	struct blockchain_node *node; 
 	node = malloc(sizeof(struct blockchain_node));
 	if (node == NULL)
 		return NULL;
-	node->b = block;
+	node->b = bl;
 	node->parent = NULL;
 	node->is_valid = NULL;
 	return &node;
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 	int i;
 
 	//This will have all of our pinters to blocks
-	int block_arr[argc];
+	struct blockchain_node block_arr[argc];
 
 	/* Read input block files. */
 	for (i = 1; i < argc; i++) {
