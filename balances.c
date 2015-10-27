@@ -85,6 +85,7 @@ int cmp_block(const void* ia, const void* ib) {
 	struct blockchain_node* a = (struct blockchain_node*) ia;
 	struct blockchain_node* b = (struct blockchain_node*) ib;
 	if(a->b.height < b->b.height) {
+		print("here");
 		return -1;
 	} else if (a->b.height > b->b.height) {
 		return 1;
@@ -127,14 +128,12 @@ int main(int argc, char *argv[])
 		/* TODO READ BLOCKS INTO MEMORY*/
 		//Just read everything in first
 		block_arr[i] = make_node(b, 0);
-
-
 		/* Feel free to add/modify/delete any code you need to. */
 	}
 
 	/* Organize into a tree, check validity, and output balances. */
 	/* TODO */
-	qsort(block_arr, sizeof(block_arr) / sizeof(struct blockchain_node), sizeof(struct blockchain_node), cmp_block);
+	qsort(block_arr, (sizeof(block_arr) / sizeof(struct blockchain_node)), sizeof(struct blockchain_node), cmp_block);
 
 	for(i = 1; i < argc; i ++) {
 		block_print(&(block_arr[i]->b), stdout);
