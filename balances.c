@@ -136,6 +136,10 @@ int main(int argc, char *argv[])
 	/* TODO */
 	qsort(block_arr, sizeof(block_arr) / sizeof(struct blockchain_node), sizeof(struct blockchain_node), cmp_block);
 
+	for(i = 1; i < argc; i ++) {
+		block_print(block_arr[i]->b, stdout);
+	}
+
 
 	struct balance *balances = NULL, *p, *next;
 	/* Print out the list of balances. */
