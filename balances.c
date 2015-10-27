@@ -97,11 +97,11 @@ struct transaction* find_transaction(hash_output h, struct blockchain_node * roo
 	hash_output g;
 	transaction_hash(&(root->b.reward_tx), g);
 	if(byte32_cmp(g, h) == 0) {
-		return root->b.reward_tx;
+		return &(root->b.reward_tx);
 	}
 	transaction_hash(&(root->b.normal_tx), g);
 	if(byte32_cmp(g, h) == 0) {
-		return root->b.normal_tx
+		return &(root->b.normal_tx);
 	} else {
 		if(byte32_is_zero(root->b.prev_block_hash)) {
 			return NULL;
