@@ -223,7 +223,6 @@ int main(int argc, char *argv[])
 	for(i = 1; i < argc - 1; i ++) {
 		curr_node = block_arr[i];
 		if(check_if_valid(curr_node)) {
-			printf("HEHEHEHE")
 			curr_node->is_valid = 1;
 		} else {
 			curr_node->is_valid = 0;
