@@ -1,0 +1,22 @@
+Kevin Kim
+Dylan Feldman
+1.
+
+The current Bitcoin mining difficulty is 60,883,825,480.
+
+2.
+
+Using TP's Bitcoin Calculator with the difficulty as 60,883,825,480 and assuming the hash rate as 10 MH/s,
+it takes 302655138 days to generate one block, or about 828641 years.
+
+3.
+
+60,883,825,480 * (2^32) = 2.615 * 10^20 hash iterations.
+Our hash operation takes about 2.85* 10^5 hashes/s, so it would take
+2.615 * 10^20 / 2.85 * 10^5 = 9.18 * 10^14 s = 29095125 years.
+
+4.
+
+The current network hash rate with the current difficulty is 435,823,399 GH/s.
+To compute 2^56 hash operations, it would take 2^56 / (435,823,399 * 10^9) = 0.165 second.
+In other words, using the Bitcoin network one DES key can be hashed and found in less than a second.

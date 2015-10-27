@@ -248,17 +248,17 @@ int main(int argc, char *argv[])
 	int curr_height = 0;
 
 	for(i = 1; i < argc - 1; i ++) {
-		*curr_node = block_arr[i];
+		&curr_node = block_arr[i];
 		if(check_if_valid(*curr_node)) {
 			(*curr_node)->is_valid = 1;
 		} else {
-			(*curr_node)->is_valid = 0;
+			curr_node.is_valid = 0;
 		}
-		if((*curr_node)->b.height > curr_height) {
+		if(curr_node.b.height > curr_height) {
 			curr_parent = last_node;
-			curr_height = (*curr_node)->b.height;
+			curr_height = curr_node.b.height;
 		}
-		(*curr_node)->parent = curr_parent;
+		curr_node.parent = curr_parent;
 		last_node = curr_node;
 
 	}
