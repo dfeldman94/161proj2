@@ -144,10 +144,10 @@ int main(int argc, char *argv[])
 	for(i = 1; i < argc - 1; i ++) {
 		curr_node = block_arr[i];
 		if(curr_node->b.height > curr_height) {
-			parent = last_node;
+			curr_parent = last_node;
 			curr_height = curr_node->b.height;
 		}
-		curr_node->parent = parent;
+		curr_node->parent = curr_parent;
 		block_print(&(block_arr[i]->b), stdout);
 
 	}
