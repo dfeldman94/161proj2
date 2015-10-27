@@ -85,7 +85,7 @@ int cmp_block(const void* ia, const void* ib) {
 	struct blockchain_node* a = (struct blockchain_node*) ia;
 	struct blockchain_node* b = (struct blockchain_node*) ib;
 	if(a->b.height < b->b.height) {
-		print("here");
+		printf("%s\n", "here");
 		return -1;
 	} else if (a->b.height > b->b.height) {
 		return 1;
