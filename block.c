@@ -139,7 +139,7 @@ void block_mine(struct block *b)
 	do {
 		b->nonce = b->nonce + 1;
 		block_hash(b, h);
-	} while(hash_output_is_below_target(h));
+	} while(!(hash_output_is_below_target(h)));
 	/* TODO */
 }
 
