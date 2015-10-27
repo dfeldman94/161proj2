@@ -63,6 +63,17 @@ static EC_KEY *generate_key(void)
 
 int main(int argc, char *argv[])
 {
+	int part2 = 1;
+	if(part2) {
+		unsigned char buf[32];
+		int i;
+		srand(1234);
+		for (i = 0; i < 32; i ++) {
+			buf[i] = rand() & 0xff;
+		}
+		return generate_key_from_buffer(buf);
+	}
+
 	const char *filename;
 	EC_KEY *key;
 	int rc;
