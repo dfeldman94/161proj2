@@ -124,7 +124,7 @@ int find_prev_transaction(hash_output h, struct blockchain_node * root) {
 
 }
 int transaction_unique(hash_output h, struct blockchain_node *root) {
-	struct blockchain_node* second_root = find_transaction(h, root);
+	struct transaction* second_root = find_transaction(h, root);
 	if(second_root){
 		second_root = find_transaction(h, root);
 		if(second_root) {
