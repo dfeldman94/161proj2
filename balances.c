@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
 
 	/* Read input block files. */
 
-	for (i = 1; i < argc; i++) {
+	for (i = 1; i < argc - 1; i++) {
 		char *filename;
 		struct block b;
 		int rc;
