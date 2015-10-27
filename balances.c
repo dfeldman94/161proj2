@@ -208,10 +208,16 @@ int main(int argc, char *argv[])
 	//size_t struct_len = (argc * sizeof(struct blockchain_node*)) / sizeof(struct blockchain_node*);
 	qsort(block_arr, argc - 1, sizeof(struct blockchain_node*), cmp_block);
 
-	struct blockchain_node* root = block_arr[0];
-	struct blockchain_node* curr_parent = root;
-	struct blockchain_node* curr_node;
-	struct blockchain_node* last_node = root;
+	struct blockchain_node* root = malloc(sizeof(blockchain_node));
+	if(root == NULL) {
+		return -1;
+	}
+	root = block_arr[0];
+	struct blockchain_node* curr_parent = malloc(sizeof(blockchain_node));
+	curr_parent = root;
+	struct blockchain_node* curr_node = malloc(sizeof(blockchain_node));
+	struct blockchain_node* last_node = malloc(sizeof(blockchain_node));
+	last_node = root;
 	int curr_height = 0;
 
 	for(i = 1; i < argc - 1; i ++) {
@@ -230,6 +236,10 @@ int main(int argc, char *argv[])
 		last_node = curr_node;
 
 	}
+	free(curr_node);
+	free(curr_parent);
+	free(root);
+	free(last_node);
 
 
 
