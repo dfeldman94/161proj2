@@ -263,7 +263,7 @@ int main(int argc, char *argv[])
 		last_node = curr_node;
 
 	}
-	/*int part2 =1;
+	int part2 =1;
 	if(part2) {
 		part2_mine(*(curr_node->b), *(last_node->b));
 	}
