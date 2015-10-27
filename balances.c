@@ -214,9 +214,19 @@ int main(int argc, char *argv[])
 	}
 	root = block_arr[0];
 	struct blockchain_node* curr_parent = malloc(sizeof(struct blockchain_node));
+	if(curr_parent == NULL) {
+		return -1;
+	}
 	curr_parent = root;
+
 	struct blockchain_node* curr_node = malloc(sizeof(struct blockchain_node));
+	if(curr_node == NULL) {
+		return -1;
+	}
 	struct blockchain_node* last_node = malloc(sizeof(struct blockchain_node));
+	if(last_node == NULL) {
+		return -1;
+	}
 	last_node = root;
 	int curr_height = 0;
 
