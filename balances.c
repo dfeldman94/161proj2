@@ -84,7 +84,6 @@ struct blockchain_node* make_node(struct block b, struct blockchain_node* parent
 int cmp_block(const void* ia, const void* ib) {
 	struct blockchain_node* a = *(struct blockchain_node**) ia;
 	struct blockchain_node* b = *(struct blockchain_node**) ib;
-	printf("a: %d, b: %d", a->b.height, b->b.height);
 	if(a->b.height < b->b.height) {
 		return -1;
 	} else if (a->b.height > b->b.height) {
@@ -136,8 +135,21 @@ int main(int argc, char *argv[])
 	//size_t struct_len = (argc * sizeof(struct blockchain_node*)) / sizeof(struct blockchain_node*);
 	qsort(block_arr, argc - 1, sizeof(struct blockchain_node*), cmp_block);
 
-	for(i = 0; i < argc - 1; i ++) {
+	struct blockchain_node* root = block_arr[0];
+	struct blockchain_node* curr_parent = root;
+	struct blockchain_node* curr_node;
+	struct blockchain_node* last_node;
+	int curr_height = 0;
+
+	for(i = 1; i < argc - 1; i ++) {
+		curr_node = block_arr[i];
+		if(curr_node->b.height > curr_height) {
+			parent = last_node;
+			curr_height = curr_node->b.height;
+		}
+		curr_node->parent = parent;
 		block_print(&(block_arr[i]->b), stdout);
+
 	}
 
 
